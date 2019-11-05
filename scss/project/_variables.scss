@@ -1,0 +1,17 @@
+$font-family-sans-serif: 'Roboto', sans-serif;
+$font-size-base: 0.9rem;
+$font-weight-bold: 800;
+
+$primary:       #4285F4;
+$secondary:     #aa66cc;
+$success:       #00C851;
+$info:          #33b5e5;
+$warning:       #ffbb33;
+$danger:        #ff4444;
+
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1190px
+);
