@@ -1,5 +1,6 @@
+html { max-width: 100vw; overflow-x: hidden; }
 body {
-    background: #e5eaee;
+    background: #e5eaee; overflow-x: hidden;
 }
 @mixin make-wrapper-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
     @each $breakpoint, $container-max-width in $max-widths {
@@ -18,27 +19,70 @@ body {
     box-shadow: rgba(0, 0, 0, .3) 0.4rem 0.7rem 9.3rem 0.3rem;
     margin: 40px auto;
     @include make-wrapper-max-widths();
+    @include media-breakpoint-down(md) { margin: 0; width: 100%; max-width: 100vw; }
 }
 a {
     transition: 0.2s all;
 }
 
+section {
+    > header {
+        margin-bottom: $grid-gutter-width;
+        > h2 {
+            text-transform: uppercase;
+            &:before {
+                display: inline-block; font-family: 'cv-icons'; background: #4caf50; text-align: center; border-radius: 50%; color: #fff; width: 2rem;
+                margin-right: 1rem; font-size: 1rem; line-height: 2rem; font-weight: normal;
+            }
+        }
+    }
+
+    a { color: #388e3c }
+
+    &#profile > header h2:before { content: '\e805'; }
+    &#experience > header h2:before { content: '\f0f2'; }
+    &#projects > header h2:before { content: '\e804'; }
+    &#opensource > header h2:before { content: '\f018'; }
+    &#skills > header h2:before { content: '\f121'; }
+    &#education > header h2:before { content: '\f19d'; background: #388e3c; }
+    &#languages > header h2:before { content: '\f018'; background: #388e3c; }
+    &#interests > header h2:before { content: '\e806'; background: #388e3c; }
+}
+
 #sidebar {
     background: #4caf50; color: #fff;
+    section {
+        > header {
+            > h2 {
+                font-size: 1rem;
+                &:before { font-size: 0.825rem; line-height: 1.75rem; width: 1.75rem; }
+            }
+        }
+        @include media-breakpoint-down(md) { padding-left: 15px; /*padding-right: 0*/ }
+        @include media-breakpoint-down(sm) { padding: 0 20px; /*padding-right: 0*/ }
+    }
 }
 #header {
     background: #388e3c;
     margin-right: -$grid-gutter-width / 2; margin-left: -$grid-gutter-width / 2; padding: $grid-gutter-width;
     text-align: center;
+    figure {
+        border-radius: 50%; overflow: hidden; width: 200px; height: 200px; margin-left: auto; margin-right: auto;
+        img { display: block; width: 100%; }
+    }
 }
 #mainbody {
     .inner {
         padding: $grid-gutter-width; padding-right: $grid-gutter-width * 2;
         > section {
-            margin-top: $grid-gutter-width;
-            &:first-child { margin-top: 0; }
+            margin-top: $grid-gutter-width * 2;
+            &:first-child { margin-top: $grid-gutter-width / 2; }
         }
+        @include media-breakpoint-down(md) { padding: 10px; padding-right: 20px; }
     }
+}
+#opensource {
+    dt { white-space: nowrap; }
 }
 
 h1 {
@@ -48,7 +92,10 @@ h1 {
 
 #address {
     list-style: none;
-    padding: $grid-gutter-width $grid-gutter-width / 2; margin-bottom: 0;
+    padding: $grid-gutter-width $grid-gutter-width / 2; margin-bottom: $grid-gutter-width;
+    border-bottom: 1px solid #388e3c;
+    @include media-breakpoint-down(md) { border-bottom: 0 none; }
+    @include media-breakpoint-down(sm) { margin-bottom: 0; }
     li {
         line-height: 2rem; position: relative; padding-left: 2.5rem; margin-bottom: 0.5rem;
         &:before {
@@ -69,25 +116,43 @@ h1 {
 }
 #education {
     ul {
-        list-style: none; margin: 0; padding: 0;
-
+        list-style: none;
+        padding: 0 0 0 0; margin-bottom: $grid-gutter-width;
+        border-bottom: 1px solid #388e3c;
         li {
             margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.25);
             &:last-child { border: 0 none; }
-            h3 { font-size: 1rem; margin-bottom: 0; color: #e8e8e8; font-weight: normal; }
-            .company { display: block; font-size: 0.875rem; float: none; color: #eee; }
-            .date { color: $gray-300; float: none; }
-            .desc { padding-top: 8px; }
+            h3 { font-size: 1rem; margin-bottom: 0; color: #fff; font-weight: normal; }
+            .company { display: block; font-size: 0.875rem; float: none; color: rgba(255, 255, 255, 0.6); }
+            .date { color: rgba(255, 255, 255, 0.6); float: none; }
+            .desc {
+                padding-top: 8px;
+                @include media-breakpoint-down(sm) { display: none; }
+            }
             p { font-size: 0.75rem; margin-bottom: 0.5rem; }
         }
     }
+}
+
+#languages {
+    padding: 0 0 0 0; margin-bottom: $grid-gutter-width;
+    border-bottom: 1px solid #388e3c;
+    .level { color: rgba(255, 255, 255, 0.6); }
+    @include media-breakpoint-down(md) { border-bottom: 0 none; }
+    @include media-breakpoint-down(sm) { margin-bottom: 0; }
+}
+#interests {
+    ul {
+        margin: 0; padding: 0; list-style: none;
+    }
+    @include media-breakpoint-down(sm) { display: none; }
 }
 
 .timeline {
     > div > ul {
         list-style: none; padding: 0; margin: 0;
         > li {
-            position: relative; padding-left: 2rem; padding-bottom: $grid-gutter-width;
+            position: relative; padding-left: 2rem; padding-bottom: $grid-gutter-width * 1.5;
             &:before {
                 display: block; content: ''; width: 8px; height: 8px; background: #388e3c; border-radius: 50%; position: absolute; top: 4px; left: 1px; z-index: 10;
                 border: 5px solid #fff; box-sizing: content-box;
@@ -105,7 +170,7 @@ h1 {
     .desc { clear: both; }
 }
     h3 { font-size: 1rem; margin-bottom: 0; color: #388e3c }
-    .company { color: $gray-700; float: left; }
+    .company { color: #8c98a9; float: left; }
     .date { color: $gray-600; float: right; }
     .desc { padding-top: 8px; }
 
@@ -123,9 +188,15 @@ h1 {
             figure {
                 &:before { display: table; content: ''; clear: left; }
                 width: 150px; float: left; margin-right: 10px;
-                a { display: block; position: relative; width: 100%; height: 0; overflow: hidden; padding-bottom: 66.666%; background: tomato; }
+                a {
+                    display: block; position: relative; width: 100%; height: 0; overflow: hidden; padding-bottom: 56.25%; background: $gray-300;
+                    img { display: block; width: 100%; height: auto; }
+                }
             }
-            .desc { margin-left: 160px; padding-top: 0; }
+            .desc {
+                margin-left: 160px; padding-top: 0;
+                @include media-breakpoint-down(md) { margin-left: 0; }
+            }
         }
     }
 }

@@ -1,0 +1,7 @@
+@media print {
+    .wrapper {
+        width: 100%; max-width: none; margin: 0; overflow: hidden;
+        > .row { margin: 0; }
+    }
+    a:not(.btn) { text-decoration: none; }
+}
