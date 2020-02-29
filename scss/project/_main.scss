@@ -27,7 +27,7 @@ a {
 
 section {
     > header {
-        margin-bottom: $grid-gutter-width;
+        margin-bottom: 20px;
         > h2 {
             text-transform: uppercase;
             &:before {
@@ -92,7 +92,7 @@ h1 {
 
 #address {
     list-style: none;
-    padding: $grid-gutter-width $grid-gutter-width / 2; margin-bottom: $grid-gutter-width;
+    padding: $grid-gutter-width $grid-gutter-width / 2 $grid-gutter-width / 2; margin-bottom: $grid-gutter-width $grid-gutter-width $grid-gutter-width / 2;
     border-bottom: 1px solid #388e3c;
     @include media-breakpoint-down(md) { border-bottom: 0 none; }
     @include media-breakpoint-down(sm) { margin-bottom: 0; }
